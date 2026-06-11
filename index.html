@@ -2,7 +2,33 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no, email=no, address=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#2563eb">
+
+<!-- Open Graph (朋友圈 / 公众号 / Twitter / Facebook 通用) -->
+<meta property="og:title" content="2026 二手手机回收维修统一考试 · 模拟卷">
+<meta property="og:description" content="18 题限时自测 · 你的回收水平能得几分？5 分钟考一下自己">
+<meta property="og:image" content="https://itslh1024.github.io/phone-recycle-exam/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://itslh1024.github.io/phone-recycle-exam/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Phone Recycle Exam">
+
+<!-- 微信专属 -->
+<meta itemprop="name" content="2026 二手手机回收维修统一考试 · 模拟卷">
+<meta itemprop="description" content="18 题限时自测 · 你的回收水平能得几分？">
+<meta itemprop="image" content="https://itslh1024.github.io/phone-recycle-exam/og-cover.png">
+
+<!-- Twitter Card (备用) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2026 二手手机回收维修统一考试 · 模拟卷">
+<meta name="twitter:description" content="18 题限时自测 · 你的回收水平能得几分？">
+<meta name="twitter:image" content="https://itslh1024.github.io/phone-recycle-exam/og-cover.png">
+
 <title>2026 全国二手手机回收维修统一考试 · 模拟卷</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -149,6 +175,7 @@
     padding: 20px 24px;
     margin-bottom: 12px;
     transition: border-color 0.2s;
+    -webkit-overflow-scrolling: touch;
   }
   .question.correct { border-color: var(--success); background: var(--success-light); }
   .question.wrong { border-color: var(--error); background: var(--error-light); }
@@ -257,6 +284,9 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
+    /* 微信浏览器适配：dvh 动态视口高度，避免地址栏顶掉内容 */
+    min-height: 100vh;
+    min-height: 100dvh;
   }
   .modal-mask.show { display: flex; }
   .modal {
@@ -654,6 +684,49 @@ function resetAll() {
 }
 
 render();
+
+/* ========== 微信内置浏览器适配 ========== */
+(function() {
+  // 隐藏地址栏（仅在微信内生效）
+  function hideWeixinAddressBar() {
+    if (typeof WeixinJSBridge !== 'undefined') {
+      WeixinJSBridge.call('hideToolbar');
+    }
+  }
+  // 页面加载后尝试隐藏
+  window.addEventListener('load', hideWeixinAddressBar);
+  // 微信内 500ms 后再试一次（解决某些版本加载顺序问题）
+  setTimeout(hideWeixinAddressBar, 500);
+
+  // 自定义微信分享卡片（微信内置浏览器右上角分享 / 朋友 / 朋友圈）
+  function setupWeixinShare() {
+    if (typeof WeixinJSBridge === 'undefined') return;
+    const shareData = {
+      img_url: 'https://itslh1024.github.io/phone-recycle-exam/og-cover.png',
+      img_width: '1200',
+      img_height: '630',
+      link: 'https://itslh1024.github.io/phone-recycle-exam/',
+      desc: '18 题限时自测 · 你的回收水平能得几分？5 分钟考一下自己',
+      title: '2026 二手手机回收维修统一考试 · 模拟卷'
+    };
+    // 发送给朋友
+    WeixinJSBridge.on('menu:share:appmessage', function() {
+      WeixinJSBridge.invoke('sendAppMessage', shareData, function() {});
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function() {
+      WeixinJSBridge.invoke('shareTimeline', shareData, function() {});
+    });
+  }
+  if (document.addEventListener) {
+    document.addEventListener('WeixinJSBridgeReady', setupWeixinShare, false);
+  } else if (document.attachEvent) {
+    document.attachEvent('WeixinJSBridgeReady', setupWeixinShare);
+    document.attachEvent('onWeixinJSBridgeReady', setupWeixinShare);
+  }
+  // 如果 WeixinJSBridge 已经加载（页面别处用过）
+  if (typeof WeixinJSBridge !== 'undefined') setupWeixinShare();
+})();
 </script>
 </body>
 </html>

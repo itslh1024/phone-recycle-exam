@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- 背景渐变：浅蓝白 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+
+    <!-- 装饰渐变：手机轮廓淡色 -->
+    <linearGradient id="phoneGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- 网格底纹：试卷条纹 -->
+    <pattern id="gridPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#2563eb" stroke-width="0.5" stroke-opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#gridPattern)"/>
+
+  <!-- 右侧淡色手机轮廓（装饰）-->
+  <g opacity="0.15" transform="translate(880, 80)">
+    <rect x="0" y="0" width="220" height="450" rx="32" ry="32" fill="url(#phoneGlow)" stroke="#2563eb" stroke-width="2"/>
+    <rect x="20" y="60" width="180" height="350" rx="6" ry="6" fill="#2563eb" fill-opacity="0.06"/>
+    <circle cx="110" cy="435" r="8" fill="#2563eb" fill-opacity="0.2"/>
+  </g>
+
+  <!-- 左侧装饰：试卷边角（5 个圆点代表 5 大题）-->
+  <g transform="translate(80, 90)">
+    <circle cx="0" cy="0" r="6" fill="#2563eb"/>
+    <circle cx="20" cy="0" r="6" fill="#2563eb" fill-opacity="0.6"/>
+    <circle cx="40" cy="0" r="6" fill="#2563eb" fill-opacity="0.4"/>
+    <circle cx="60" cy="0" r="6" fill="#2563eb" fill-opacity="0.3"/>
+    <circle cx="80" cy="0" r="6" fill="#2563eb" fill-opacity="0.2"/>
+  </g>
+
+  <!-- 顶部小标签：考试类型 -->
+  <g transform="translate(80, 140)">
+    <rect x="0" y="0" width="180" height="36" rx="18" fill="#2563eb"/>
+    <text x="90" y="24" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="600" fill="#ffffff" text-anchor="middle">EXAM PAPER 2026</text>
+  </g>
+
+  <!-- 主标题：3 行大字 -->
+  <g transform="translate(80, 220)">
+    <text x="0" y="0" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="72" font-weight="700" fill="#0f172a">2026 全国二手手机</text>
+    <text x="0" y="90" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="72" font-weight="700" fill="#0f172a">回收维修统一考试</text>
+  </g>
+
+  <!-- 副标题：模拟卷 -->
+  <g transform="translate(80, 410)">
+    <text x="0" y="0" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="42" font-weight="500" fill="#2563eb">· 模拟卷 ·</text>
+  </g>
+
+  <!-- 底部信息条：3 个信息卡 -->
+  <g transform="translate(80, 480)">
+    <!-- 信息卡 1：题数 -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="160" height="64" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+      <text x="80" y="28" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="500" fill="#6b7280" text-anchor="middle">题数</text>
+      <text x="80" y="52" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="700" fill="#2563eb" text-anchor="middle">18 题</text>
+    </g>
+    <!-- 信息卡 2：时长 -->
+    <g transform="translate(180, 0)">
+      <rect x="0" y="0" width="160" height="64" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+      <text x="80" y="28" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="500" fill="#6b7280" text-anchor="middle">时长</text>
+      <text x="80" y="52" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="700" fill="#2563eb" text-anchor="middle">5 分钟</text>
+    </g>
+    <!-- 信息卡 3：满分 -->
+    <g transform="translate(360, 0)">
+      <rect x="0" y="0" width="160" height="64" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+      <text x="80" y="28" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="500" fill="#6b7280" text-anchor="middle">满分</text>
+      <text x="80" y="52" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="700" fill="#ef4444" text-anchor="middle">100 分</text>
+    </g>
+  </g>
+
+  <!-- 右上角满分徽章 -->
+  <g transform="translate(1020, 80)">
+    <rect x="0" y="0" width="120" height="50" rx="25" fill="#ef4444"/>
+    <text x="60" y="33" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle">满分 100</text>
+  </g>
+
+  <!-- 底部域名水印 -->
+  <text x="600" y="600" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">itslh1024.github.io/phone-recycle-exam</text>
+</svg>
