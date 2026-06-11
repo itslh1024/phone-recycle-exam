@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 全国二手手机回收维修统一考试 · 模拟卷</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --error: #ef4444;
+    --error-light: #fee2e2;
+    --radius: 12px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header .subtitle {
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .meta input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--border);
+    color: var(--text);
+    font-size: 13px;
+    padding: 2px 8px;
+    width: 120px;
+    text-align: center;
+    font-family: inherit;
+  }
+  .meta input:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+  }
+
+  /* Score bar */
+  .score-bar {
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    z-index: 10;
+  }
+  .score-bar .score {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .score-bar .score strong {
+    color: var(--accent);
+    font-size: 18px;
+    margin-left: 4px;
+  }
+  .btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: inherit;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn.secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    margin-left: 8px;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title h2 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .section-title .points {
+    margin-left: auto;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* Question card */
+  .question {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .question.correct { border-color: var(--success); background: var(--success-light); }
+  .question.wrong { border-color: var(--error); background: var(--error-light); }
+  .question.partial { border-color: #f59e0b; background: #fef3c7; }
+
+  .q-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 32px;
+  }
+  .q-text {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Options */
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-left: 44px;
+  }
+  .option {
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+    text-align: left;
+    font-family: inherit;
+    color: var(--text);
+  }
+  .option:hover { border-color: var(--accent); background: var(--accent-light); }
+  .option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 500; }
+  .option.right { border-color: var(--success); background: var(--success-light); color: var(--success); }
+  .option.wrong { border-color: var(--error); background: var(--error-light); color: var(--error); }
+
+  /* Fill / judge / short */
+  .answer-input {
+    margin-left: 44px;
+    width: calc(100% - 44px);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--card);
+    resize: vertical;
+  }
+  .answer-input:focus { outline: none; border-color: var(--accent); }
+  textarea.answer-input { min-height: 60px; }
+  textarea.answer-input.tall { min-height: 120px; }
+
+  .judge-group {
+    margin-left: 44px;
+    display: flex;
+    gap: 8px;
+  }
+  .judge-btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 8px;
+    padding: 8px 24px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--text);
+  }
+  .judge-btn.selected { background: var(--accent-light); border-color: var(--accent); color: var(--accent); font-weight: 500; }
+  .judge-btn.right { background: var(--success-light); border-color: var(--success); color: var(--success); }
+  .judge-btn.wrong { background: var(--error-light); border-color: var(--error); color: var(--error); }
+
+  .feedback {
+    margin-top: 12px;
+    margin-left: 44px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.right { background: var(--success-light); color: #065f46; }
+  .feedback.wrong { background: var(--error-light); color: #991b1b; }
+  .feedback strong { font-weight: 600; }
+
+  /* Short answer sub-blocks */
+  .sub-block { margin-top: 10px; }
+  .sub-label { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+  .sub-label b { color: var(--text); }
+
+  /* Result modal */
+  .modal-mask {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .modal-mask.show { display: flex; }
+  .modal {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  }
+  .modal h2 { font-size: 22px; margin-bottom: 8px; }
+  .modal .big-score {
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 16px 0 8px;
+    letter-spacing: -2px;
+  }
+  .modal .comment {
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .modal .actions { display: flex; gap: 12px; justify-content: center; }
+
+  @media (max-width: 600px) {
+    .options { grid-template-columns: 1fr; }
+    .header h1 { font-size: 22px; }
+    .meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>2026 全国二手手机回收维修统一考试</h1>
+    <div class="subtitle">模拟卷 · 满分 100 分</div>
+    <div class="meta">
+      <span>姓名：<input type="text" id="userName" placeholder="请输入"></span>
+      <span>学校：<input type="text" id="userSchool" placeholder="请输入"></span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <div class="score">已作答 <strong id="answered">0</strong> / 18 题 · 客观题 <strong id="liveScore">0</strong> / 80 分</div>
+    <div>
+      <button class="btn" onclick="submitAll()">交卷</button>
+      <button class="btn secondary" onclick="resetAll()">重置</button>
+    </div>
+  </div>
+
+  <!-- Section 1: 选择题 -->
+  <div class="section">
+    <div class="section-title">
+      <h2>一、选择题</h2>
+      <span class="points">每题 5 分 · 共 40 分</span>
+    </div>
+    <div id="sec1"></div>
+  </div>
+
+  <!-- Section 2: 填空题 -->
+  <div class="section">
+    <div class="section-title">
+      <h2>二、填空题</h2>
+      <span class="points">每题 5 分 · 共 20 分</span>
+    </div>
+    <div id="sec2"></div>
+  </div>
+
+  <!-- Section 3: 判断题 -->
+  <div class="section">
+    <div class="section-title">
+      <h2>三、判断题</h2>
+      <span class="points">每题 5 分 · 共 20 分</span>
+    </div>
+    <div id="sec3"></div>
+  </div>
+
+  <!-- Section 4: 简答题 -->
+  <div class="section">
+    <div class="section-title">
+      <h2>四、简答题</h2>
+      <span class="points">共 1 题 · 10 分（人工评分）</span>
+    </div>
+    <div id="sec4"></div>
+  </div>
+
+  <!-- Section 5: 附加题 -->
+  <div class="section">
+    <div class="section-title">
+      <h2>五、附加题</h2>
+      <span class="points">共 1 题 · 10 分（人工评分）</span>
+    </div>
+    <div id="sec5"></div>
+  </div>
+
+</div>
+
+<!-- Result modal -->
+<div class="modal-mask" id="modal">
+  <div class="modal">
+    <h2>交卷完成 🎉</h2>
+    <div class="big-score"><span id="finalAuto">0</span><span style="color:#9ca3af;font-size:32px"> / 100</span></div>
+    <div class="comment" id="comment">点击下方查看参考答案</div>
+    <div class="actions">
+      <button class="btn" onclick="showAllAnswers()">查看答案</button>
+      <button class="btn secondary" onclick="closeModal()">关闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ========== 题库数据 ========== */
+const questions = [
+  // 选择题 1-8
+  { type: 'choice', section: 1, num: 1, text: '一台 iPhone 13 电池健康度为 75%，最合理的建议是（  ）',
+    options: ['继续使用', '更换电池', '更换屏幕', '直接报废'],
+    answer: 'B', points: 5 },
+  { type: 'choice', section: 1, num: 2, text: '二手手机回收时，最影响价格的因素是（  ）',
+    options: ['手机颜色', '手机壳款式', '屏幕和功能状态', '壁纸好不好看'],
+    answer: 'C', points: 5 },
+  { type: 'choice', section: 1, num: 3, text: '以下哪种情况属于"扩容机"（  ）',
+    options: ['更换电池', '增加手机存储容量', '更换外壳', '更换钢化膜'],
+    answer: 'B', points: 5 },
+  { type: 'choice', section: 1, num: 4, text: '回收二手手机时，第一步应该检查（  ）',
+    options: ['游戏段位', '微信好友数量', '型号与账号锁状态', '手机铃声'],
+    answer: 'C', points: 5 },
+  { type: 'choice', section: 1, num: 5, text: '以下哪项不属于手机常规维修项目（  ）',
+    options: ['换屏', '换电池', '主板维修', '帮对象回消息'],
+    answer: 'D', points: 5 },
+  { type: 'choice', section: 1, num: 6, text: '客户说手机充不进电，最先应该检查（  ）',
+    options: ['手机壳', '充电口和数据线', '壁纸', '运营商'],
+    answer: 'B', points: 5 },
+  { type: 'choice', section: 1, num: 7, text: '二手手机市场中，"靓机"通常指（  ）',
+    options: ['外观和功能较好的手机', '全新未拆封', '山寨机', '备用机'],
+    answer: 'A', points: 5 },
+  { type: 'choice', section: 1, num: 8, text: '以下哪种情况最容易导致手机大幅贬值（  ）',
+    options: ['贴膜', '更换电池', '主板维修记录', '清理灰尘'],
+    answer: 'C', points: 5 },
+
+  // 填空题 9-12
+  { type: 'fill', section: 2, num: 9,
+    text: '苹果手机查看电池健康路径：<b>设置</b> → _______ → <b>电池健康与充电</b>',
+    answer: '电池', points: 5 },
+  { type: 'fill', section: 2, num: 10,
+    text: '回收手机前必须提醒客户退出 _______ 账号。',
+    answer: '苹果ID', points: 5,
+    keywords: ['苹果ID', 'iCloud', 'Apple ID', '华为账号', '账号'] },
+  { type: 'fill', section: 2, num: 11,
+    text: '手机进水后最忌讳的操作是立即按下 _______ 键开机。',
+    answer: '电源', points: 5,
+    keywords: ['电源', '开机'] },
+  { type: 'fill', section: 2, num: 12,
+    text: '安卓手机恢复出厂设置前应备份重要 _______。',
+    answer: '数据', points: 5,
+    keywords: ['数据', '资料'] },
+
+  // 判断题 13-16
+  { type: 'judge', section: 3, num: 13,
+    text: '手机摔碎外屏但触摸正常，可以只更换外屏。',
+    answer: true, points: 5 },
+  { type: 'judge', section: 3, num: 14,
+    text: '有 ID 锁的苹果手机会严重影响回收价格。',
+    answer: true, points: 5 },
+  { type: 'judge', section: 3, num: 15,
+    text: '手机外观越新，回收价格通常越高。',
+    answer: true, points: 5 },
+  { type: 'judge', section: 3, num: 16,
+    text: '手机进水后马上充电有助于排出水分。',
+    answer: false, points: 5 },
+
+  // 简答题 17
+  { type: 'short', section: 4, num: 17,
+    text: '请写出回收一台二手手机的标准流程（不少于 5 步）',
+    points: 10 },
+
+  // 附加题 18
+  { type: 'addon', section: 5, num: 18,
+    text: '一台 iPhone 13 128G，电池健康 79%，边框轻微磕碰，功能全部正常，无 ID 锁。请从回收商角度写出：',
+    sub: [
+      { label: '① 优点', placeholder: '请填写该机的优点...' },
+      { label: '② 缺点', placeholder: '请填写该机的缺点...' },
+      { label: '③ 最终是否建议回收', placeholder: '请填写是否建议回收及理由...' }
+    ],
+    points: 10 }
+];
+
+const state = {};
+
+/* ========== 渲染 ========== */
+function render() {
+  const sec = { 1: [], 2: [], 3: [], 4: [], 5: [] };
+  questions.forEach((q, idx) => sec[q.section].push({ q, idx }));
+
+  Object.keys(sec).forEach(k => {
+    const el = document.getElementById('sec' + k);
+    el.innerHTML = sec[k].map(({ q, idx }) => renderOne(q, idx)).join('');
+  });
+}
+
+function renderOne(q, idx) {
+  const id = `q${idx}`;
+  state[idx] = { ...q, userAnswer: null, judged: false, correct: false };
+
+  let body = '';
+  if (q.type === 'choice') {
+    body = `<div class="options" data-q="${idx}">` +
+      q.options.map((opt, i) => {
+        const letter = String.fromCharCode(65 + i);
+        return `<button class="option" data-letter="${letter}" onclick="selectChoice(${idx},'${letter}')">${letter}. ${opt}</button>`;
+      }).join('') +
+      `</div>`;
+  } else if (q.type === 'fill') {
+    body = `<input class="answer-input" type="text" placeholder="请输入答案" oninput="inputFill(${idx}, this.value)">`;
+  } else if (q.type === 'judge') {
+    body = `<div class="judge-group">
+      <button class="judge-btn" onclick="selectJudge(${idx},true)">✓ 正确</button>
+      <button class="judge-btn" onclick="selectJudge(${idx},false)">✗ 错误</button>
+    </div>`;
+  } else if (q.type === 'short') {
+    body = `<textarea class="answer-input tall" placeholder="请填写标准流程，不少于 5 步..." oninput="inputFill(${idx}, this.value)"></textarea>`;
+  } else if (q.type === 'addon') {
+    body = q.sub.map((s, i) => `
+      <div class="sub-block">
+        <div class="sub-label"><b>${s.label}</b></div>
+        <textarea class="answer-input" placeholder="${s.placeholder}" oninput="inputAddon(${idx}, ${i}, this.value)"></textarea>
+      </div>
+    `).join('');
+  }
+
+  return `<div class="question" id="card${idx}">
+    <div class="q-header">
+      <div class="q-num">${q.num}.</div>
+      <div class="q-text">${q.text}</div>
+    </div>
+    ${body}
+    <div class="feedback" id="fb${idx}"></div>
+  </div>`;
+}
+
+/* ========== 交互 ========== */
+function selectChoice(idx, letter) {
+  if (state[idx].judged) return;
+  state[idx].userAnswer = letter;
+  const card = document.getElementById('card' + idx);
+  card.querySelectorAll('.option').forEach(b => {
+    b.classList.toggle('selected', b.dataset.letter === letter);
+  });
+  updateLive();
+}
+
+function selectJudge(idx, val) {
+  if (state[idx].judged) return;
+  state[idx].userAnswer = val;
+  const card = document.getElementById('card' + idx);
+  card.querySelectorAll('.judge-btn').forEach((b, i) => {
+    b.classList.toggle('selected', (i === 0) === val);
+  });
+  updateLive();
+}
+
+function inputFill(idx, val) {
+  state[idx].userAnswer = val;
+  updateLive();
+}
+
+function inputAddon(idx, subIdx, val) {
+  if (!state[idx].addon) state[idx].addon = ['', '', ''];
+  state[idx].addon[subIdx] = val;
+  state[idx].userAnswer = state[idx].addon.join('|');
+  updateLive();
+}
+
+function updateLive() {
+  const answered = questions.filter((q, i) => {
+    const u = state[i].userAnswer;
+    if (u === null || u === undefined || u === '') return false;
+    if (q.type === 'addon') return state[i].addon && state[i].addon.some(v => v && v.trim());
+    return true;
+  }).length;
+  document.getElementById('answered').textContent = answered;
+  document.getElementById('liveScore').textContent = computeScore().auto;
+}
+
+/* ========== 判分 ========== */
+function computeScore() {
+  let auto = 0;
+  let pendingHuman = 0;
+  questions.forEach((q, i) => {
+    const s = state[i];
+    if (q.type === 'choice' || q.type === 'judge') {
+      if (s.userAnswer === null || s.userAnswer === undefined) return;
+      const correct = s.userAnswer === q.answer;
+      s.correct = correct;
+      if (correct) auto += q.points;
+    } else if (q.type === 'fill') {
+      const v = (s.userAnswer || '').toString().trim();
+      if (!v) return;
+      const keys = q.keywords || [q.answer];
+      const hit = keys.some(k => v.toLowerCase().includes(k.toLowerCase()) || k.toLowerCase().includes(v.toLowerCase()));
+      s.correct = hit;
+      if (hit) auto += q.points;
+    } else {
+      // 简答 + 附加 — 人工评分
+      pendingHuman += q.points;
+    }
+  });
+  return { auto, pendingHuman };
+}
+
+function judgeOne(idx) {
+  const q = questions[idx];
+  const s = state[idx];
+  const card = document.getElementById('card' + idx);
+  const fb = document.getElementById('fb' + idx);
+  s.judged = true;
+
+  if (q.type === 'choice') {
+    card.querySelectorAll('.option').forEach(b => {
+      b.classList.remove('selected');
+      if (b.dataset.letter === q.answer) b.classList.add('right');
+      if (b.dataset.letter === s.userAnswer && s.userAnswer !== q.answer) b.classList.add('wrong');
+    });
+    showFeedback(fb, s.correct,
+      `正确答案：<strong>${q.answer}</strong>`,
+      `正确答案：<strong>${q.answer}</strong>，你选择了 <strong>${s.userAnswer || '未作答'}</strong>`);
+  } else if (q.type === 'judge') {
+    card.querySelectorAll('.judge-btn').forEach((b, i) => {
+      b.classList.remove('selected');
+      const val = i === 0;
+      if (val === q.answer) b.classList.add('right');
+      if (val === s.userAnswer && val !== q.answer) b.classList.add('wrong');
+    });
+    showFeedback(fb, s.correct,
+      `正确答案：<strong>${q.answer ? '正确' : '错误'}</strong>`,
+      `正确答案：<strong>${q.answer ? '正确' : '错误'}</strong>，你选择了 <strong>${s.userAnswer === null ? '未作答' : (s.userAnswer ? '正确' : '错误')}</strong>`);
+  } else if (q.type === 'fill') {
+    showFeedback(fb, s.correct,
+      `参考答案：<strong>${q.answer}</strong>${q.keywords && q.keywords.length>1 ? `（或 ${q.keywords.join(' / ')}）` : ''}`,
+      `参考答案：<strong>${q.answer}</strong>，你的答案：<strong>${s.userAnswer || '未作答'}</strong>`);
+  } else if (q.type === 'short') {
+    const ref = '1. 询问机型和使用情况  2. 检查外观和功能  3. 检查账号锁和绑定状态  4. 评估价格并报价  5. 确认交易并完成付款';
+    showFeedback(fb, null, `<strong>参考答案要点：</strong>${ref}<br><em style="color:#6b7280">（主观题，建议人工对照给分）</em>`);
+  } else if (q.type === 'addon') {
+    const ref = '① 优点：机型热门、内存充足、功能正常、无 ID 锁  ② 缺点：电池健康一般、边框有磕碰  ③ 建议回收（可给出合理报价）';
+    showFeedback(fb, null, `<strong>参考答案要点：</strong>${ref}<br><em style="color:#6b7280">（主观题，建议人工对照给分）</em>`);
+  }
+
+  card.classList.add(s.correct ? 'correct' : (s.correct === null || s.correct === undefined ? '' : 'wrong'));
+  if (s.correct === false) card.classList.add('wrong');
+}
+
+function showFeedback(el, correct, rightMsg, wrongMsg) {
+  el.classList.add('show');
+  if (correct === null) { el.className = 'feedback show'; el.innerHTML = rightMsg; return; }
+  if (correct) { el.className = 'feedback show right'; el.innerHTML = '✓ ' + rightMsg; }
+  else { el.className = 'feedback show wrong'; el.innerHTML = '✗ ' + wrongMsg; }
+}
+
+/* ========== 交卷 / 重置 ========== */
+function submitAll() {
+  questions.forEach((q, i) => judgeOne(i));
+  const { auto, pendingHuman } = computeScore();
+  // 满分 100 = 客观 80 + 主观 20
+  // pendingHuman 包含简答(10) + 附加(10) = 20
+  // 顶栏实时分只显示客观分；交卷总分 = 客观 + 主观（人工评）
+  document.getElementById('finalAuto').textContent = auto;
+  let comment = `客观题已得 <strong>${auto}</strong> / 80 分`;
+  comment += `<br>主观题（简答 10 + 附加 10）共 20 分，需人工评分`;
+  comment += `<br><span style="color:#6b7280;font-size:13px">点击下方查看参考答案 · 满分 100</span>`;
+  document.getElementById('comment').innerHTML = comment;
+  document.getElementById('modal').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showAllAnswers() {
+  document.getElementById('modal').classList.remove('show');
+  document.getElementById('answered').textContent = questions.length;
+  document.getElementById('liveScore').textContent = computeScore().auto; // 只显示客观分
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+
+function resetAll() {
+  if (!confirm('确定要重置所有答案吗？')) return;
+  document.getElementById('userName').value = '';
+  document.getElementById('userSchool').value = '';
+  render();
+  document.getElementById('answered').textContent = 0;
+  document.getElementById('liveScore').textContent = 0;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+render();
+</script>
+</body>
+</html>
