@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+  <defs>
+    <!-- 背景渐变：翠绿（参考图色调） -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="50%" stop-color="#0d9669"/>
+      <stop offset="100%" stop-color="#0a7a55"/>
+    </linearGradient>
+
+    <!-- 波浪线渐变（底部装饰） -->
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============ 背景层 ============ -->
+  <rect x="0" y="0" width="640" height="640" rx="80" ry="80" fill="url(#bgGrad)"/>
+
+  <!-- 底部 3 条波浪线（参考图细节） -->
+  <g stroke="url(#waveGrad)" stroke-width="2" fill="none">
+    <path d="M -20 540 Q 160 510 320 540 T 660 540"/>
+    <path d="M -20 570 Q 160 540 320 570 T 660 570"/>
+    <path d="M -20 600 Q 160 570 320 600 T 660 600"/>
+  </g>
+
+  <!-- ============ 主元素层（安全区 80% 居中） ============ -->
+  <!-- 手机外壳（线稿） -->
+  <g stroke="#ffffff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- 手机外框 -->
+    <rect x="200" y="135" width="180" height="320" rx="22" ry="22"/>
+
+    <!-- 顶部扬声器 -->
+    <line x1="270" y1="155" x2="310" y2="155"/>
+
+    <!-- 屏幕内框 -->
+    <rect x="218" y="175" width="144" height="240" rx="4" ry="4"/>
+
+    <!-- 底部 Home 键 -->
+    <circle cx="290" cy="435" r="10"/>
+  </g>
+
+  <!-- ============ 屏幕内部电路板纹理（参考图核心细节） ============ -->
+  <g stroke="#ffffff" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round" opacity="0.95">
+    <!-- 上半部分（第 1 行）-->
+    <path d="M 225 195 L 255 195 L 255 215 L 290 215 L 290 230 L 320 230"/>
+    <circle cx="255" cy="195" r="4" fill="#0d9669"/>
+    <circle cx="290" cy="215" r="4" fill="#0d9669"/>
+    <circle cx="320" cy="230" r="4" fill="#0d9669"/>
+
+    <!-- 第 2 行 -->
+    <path d="M 225 220 L 245 220 L 245 245 L 275 245"/>
+    <circle cx="245" cy="220" r="4" fill="#0d9669"/>
+    <circle cx="275" cy="245" r="4" fill="#0d9669"/>
+
+    <!-- 第 3 行 -->
+    <path d="M 225 260 L 265 260 L 265 280 L 305 280 L 305 295"/>
+    <circle cx="265" cy="260" r="4" fill="#0d9669"/>
+    <circle cx="305" cy="295" r="4" fill="#0d9669"/>
+
+    <!-- 第 4 行 -->
+    <path d="M 225 285 L 250 285 L 250 310 L 285 310"/>
+    <circle cx="250" cy="285" r="4" fill="#0d9669"/>
+    <circle cx="285" cy="310" r="4" fill="#0d9669"/>
+
+    <!-- 第 5 行 -->
+    <path d="M 225 320 L 270 320 L 270 340 L 315 340"/>
+    <circle cx="270" cy="320" r="4" fill="#0d9669"/>
+    <circle cx="315" cy="340" r="4" fill="#0d9669"/>
+
+    <!-- 第 6 行 -->
+    <path d="M 225 350 L 250 350 L 250 375 L 290 375 L 290 390"/>
+    <circle cx="250" cy="350" r="4" fill="#0d9669"/>
+    <circle cx="290" cy="390" r="4" fill="#0d9669"/>
+
+    <!-- 下半部分 -->
+    <path d="M 225 385 L 260 385 L 260 405 L 320 405"/>
+    <circle cx="260" cy="385" r="4" fill="#0d9669"/>
+    <circle cx="320" cy="405" r="4" fill="#0d9669"/>
+  </g>
+
+  <!-- ============ 十字螺丝刀（X 形叠加，参考图核心元素） ============ -->
+  <g stroke="#ffffff" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <!-- 螺丝刀 1：从左上到右下 -->
+    <g transform="translate(440, 200) rotate(50)">
+      <!-- 刀头（十字） -->
+      <rect x="-15" y="-12" width="30" height="24"/>
+      <line x1="-15" y1="0" x2="15" y2="0" stroke-width="4"/>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke-width="4"/>
+      <!-- 刀身 -->
+      <rect x="15" y="-6" width="80" height="12"/>
+      <!-- 刀柄（带握把纹理） -->
+      <rect x="95" y="-9" width="60" height="18" rx="2"/>
+      <line x1="105" y1="-9" x2="105" y2="9" stroke-width="2"/>
+      <line x1="115" y1="-9" x2="115" y2="9" stroke-width="2"/>
+      <line x1="125" y1="-9" x2="125" y2="9" stroke-width="2"/>
+      <line x1="135" y1="-9" x2="135" y2="9" stroke-width="2"/>
+      <line x1="145" y1="-9" x2="145" y2="9" stroke-width="2"/>
+      <!-- 尾部金属环 -->
+      <circle cx="160" cy="0" r="6" fill="#ffffff"/>
+    </g>
+
+    <!-- 螺丝刀 2：从右上到左下（与刀 1 呈 X） -->
+    <g transform="translate(440, 200) rotate(130)">
+      <rect x="-15" y="-12" width="30" height="24"/>
+      <line x1="-15" y1="0" x2="15" y2="0" stroke-width="4"/>
+      <line x1="0" y1="-12" x2="0" y2="12" stroke-width="4"/>
+      <rect x="15" y="-6" width="80" height="12"/>
+      <rect x="95" y="-9" width="60" height="18" rx="2"/>
+      <line x1="105" y1="-9" x2="105" y2="9" stroke-width="2"/>
+      <line x1="115" y1="-9" x2="115" y2="9" stroke-width="2"/>
+      <line x1="125" y1="-9" x2="125" y2="9" stroke-width="2"/>
+      <line x1="135" y1="-9" x2="135" y2="9" stroke-width="2"/>
+      <line x1="145" y1="-9" x2="145" y2="9" stroke-width="2"/>
+      <circle cx="160" cy="0" r="6" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- ============ 底部副标题（参考图文字） ============ -->
+  <text x="320" y="615" font-family="-apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="26" font-weight="500" fill="#ffffff" fill-opacity="0.92" text-anchor="middle" letter-spacing="2">3C 数码 · 维修 · 资讯</text>
+</svg>
